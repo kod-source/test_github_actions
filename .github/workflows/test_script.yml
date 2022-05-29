@@ -6,5 +6,9 @@ jobs:
   go_run_test:
     runs-on: ubuntu-latest
     steps:
+      - name: go moo
+        run: go mod init github.com/kod-source/test_github_actions
+      - name: go mod tidy
+        run: go mod tidy
       - name: go test -v
         run: go test -v github.com/kod-source/test_github_actions/hello
