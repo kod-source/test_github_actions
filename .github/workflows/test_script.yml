@@ -17,6 +17,6 @@ jobs:
     needs: setup
     runs-on: ubuntu-latest
     steps:
-      # - uses: actions/checkout@v2
+      - uses: actions/checkout@v2
       - name: test
         run: go test -v github.com/kod-source/test_github_actions/hello
