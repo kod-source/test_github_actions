@@ -1,14 +1,12 @@
 name: Test Script
 
 on:
-  push:
-    branches:
-      - main
+  push
   workflow_dispatch:
 
 jobs:
-  print-hello-world:
+  go_run_test:
     runs-on: ubuntu-latest
     steps:
-      - name: execute echo command
-        run: echo "Hello World!"
+      - name: go test -v
+        run: go test -v github.com/kod-source/test_github_actions/hello
