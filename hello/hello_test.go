@@ -8,7 +8,8 @@ import (
 )
 
 func TestGetHello(t *testing.T) {
-	err := godotenv.Load("./../.env")
+	err := godotenv.Load()
+	// err := godotenv.Load("./../.env")
 	if err != nil {
 		t.Error(err)
 	}
