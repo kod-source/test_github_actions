@@ -1,8 +1,6 @@
 name: Test Script
 
-on:
-  push
-  workflow_dispatch:
+on: push
 
 jobs:
   go_run_test:
