@@ -16,9 +16,9 @@ jobs:
   test:
     needs: setup
     runs-on: ubuntu-latest
+    env:
+      TEST_EXPECT: こんにちは、テストさん！
     steps:
       - uses: actions/checkout@v2
       - name: test
         run: TEST_EXPECT=$TEST_EXPECT go test -v github.com/kod-source/test_github_actions/hello
-        env:
-          TEST_EXPECT: こんにちは、テストさん！
