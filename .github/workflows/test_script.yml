@@ -16,7 +16,9 @@ jobs:
   test:
     needs: setup
     runs-on: ubuntu-latest
+    env:
+      TEST_EXPECT: ${{ secrets.TEST_EXPECT }}
     steps:
       - uses: actions/checkout@v2
       - name: test
-        run: go test -v github.com/kod-source/test_github_actions/hello
+        run: TEST_EXPECT=$TEST_EXPECT go test -v github.com/kod-source/test_github_actions/hello
