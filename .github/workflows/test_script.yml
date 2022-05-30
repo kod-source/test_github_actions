@@ -1,4 +1,4 @@
-name: Test Script
+name: run test
 
 on: push
 
@@ -17,8 +17,12 @@ jobs:
     needs: setup
     runs-on: ubuntu-latest
     env:
-      TEST_EXPECT: ${{ secrets.TEST_EXPECT }}
+      HOST_NAME: localhost
+      PORT: 3306
+      DB_USER_NAME: onboard_user
+      DB_PASSWORD: Ve9RgxBbkNAKQKvVVA!HVgJK
+      TEST_DB_NAME: test_onboard_2_db
     steps:
       - uses: actions/checkout@v2
       - name: test
-        run: TEST_EXPECT=$TEST_EXPECT go test -v github.com/kod-source/test_github_actions/hello
+        run: HOST_NAME=$HOST_NAME PORT=$PORT DB_USER_NAME=$DB_USER_NAME DB_PASSWORD=$DB_PASSWORD TEST_DB_NAME=$TEST_DB_NAME go test -v ./...
