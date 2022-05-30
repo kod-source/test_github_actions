@@ -22,6 +22,7 @@ jobs:
         ports:
           - 3306:3306
         env:
+          MYSQL_ROOT_PASSWORD: ${{ secrets.TEST_EXPECT }}
           MYSQL_DATABASE: test_onboard_2_db
           MYSQL_USER: onboard_user
           MYSQL_PASSWORD: Ve9RgxBbkNAKQKvVVA!HVgJK
