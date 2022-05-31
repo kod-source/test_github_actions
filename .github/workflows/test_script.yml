@@ -29,7 +29,7 @@ jobs:
           - 3306:3306
         env:
           MYSQL_ROOT_PASSWORD: ${{ secrets.TEST_EXPECT }}
-          MYSQL_DATABASE: $DB_USER_NAME
+          MYSQL_DATABASE: $TEST_DB_NAME
           MYSQL_USER: $DB_USER_NAME
           MYSQL_PASSWORD: $DB_PASSWORD
         options: >-
