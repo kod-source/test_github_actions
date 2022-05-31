@@ -16,6 +16,12 @@ jobs:
   test:
     needs: setup
     runs-on: ubuntu-latest
+    env:
+      HOST_NAME: localhost
+      PORT: 3306
+      DB_USER_NAME: onboard_user
+      DB_PASSWORD: Ve9RgxBbkNAKQKvVVA!HVgJK
+      TEST_DB_NAME: test_onboard_2_db
     services:
       db:
         image: mysql:8.0
@@ -23,20 +29,14 @@ jobs:
           - 3306:3306
         env:
           MYSQL_ROOT_PASSWORD: ${{ secrets.TEST_EXPECT }}
-          MYSQL_DATABASE: test_onboard_2_db
-          MYSQL_USER: onboard_user
-          MYSQL_PASSWORD: Ve9RgxBbkNAKQKvVVA!HVgJK
+          MYSQL_DATABASE: $DB_USER_NAME
+          MYSQL_USER: $DB_USER_NAME
+          MYSQL_PASSWORD: $DB_PASSWORD
         options: >-
           --health-cmd "mysqladmin ping"
           --health-interval 10s
           --health-timeout 5s
           --health-retries 5
-    env:
-      HOST_NAME: localhost
-      PORT: 3306
-      DB_USER_NAME: onboard_user
-      DB_PASSWORD: Ve9RgxBbkNAKQKvVVA!HVgJK
-      TEST_DB_NAME: test_onboard_2_db
     steps:
       - uses: actions/checkout@v2
       - name: test
