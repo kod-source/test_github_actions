@@ -1,24 +1,37 @@
-name: Test Script
+name: run test
 
 on: push
 
 jobs:
-  setup:
+  test:
     runs-on: ubuntu-latest
+    services:
+      db:
+        image: mysql:8.0
+        ports:
+          - 3306:3306
+        env:
+          MYSQL_ROOT_PASSWORD: ${{ secrets.TEST_EXPECT }}
+          MYSQL_DATABASE: test_onboard_2_db
+          MYSQL_USER: onboard_user
+          MYSQL_PASSWORD: Ve9RgxBbkNAKQKvVVA!HVgJK
+        options: >-
+          --health-cmd "mysqladmin ping"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+    env:
+      HOST_NAME: localhost
+      PORT: 3306
+      DB_USER_NAME: onboard_user
+      DB_PASSWORD: Ve9RgxBbkNAKQKvVVA!HVgJK
+      TEST_DB_NAME: test_onboard_2_db
     steps:
       - name: set up
-        uses: actions/setup-go@v2
+        uses: actions/setup-go@v3
         with:
           go-version: ^1.18
         id: go
-      - name: check out
-        uses: actions/checkout@v2
-  test:
-    needs: setup
-    runs-on: ubuntu-latest
-    env:
-      TEST_EXPECT: ${{ secrets.TEST_EXPECT }}
-    steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: test
-        run: TEST_EXPECT=$TEST_EXPECT go test -v github.com/kod-source/test_github_actions/hello
+        run: go test -v ./...
